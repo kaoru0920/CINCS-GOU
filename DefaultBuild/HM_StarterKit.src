@@ -1,0 +1,1505 @@
+;RX Family C/C++ Compiler (V3.03.00 [20 Nov 2020])  04-Nov-2022 11:26:20
+
+;*** CPU TYPE ***
+
+;-ISA=RXV1
+
+;*** COMMAND PARAMETER ***
+
+;-output=src=HM_StarterKit.src
+;-isa=rxv1
+;-fpu
+;-lang=c99
+;-include=.
+;-obj_path=DefaultBuild
+;-asm_path=DefaultBuild
+;-debug
+;-g_line
+;-optimize=0
+;-nologo
+;HM_StarterKit.c
+
+		.glb	_sen_r
+		.glb	_sen_l
+		.glb	_sen_fr
+		.glb	_sen_fl
+		.glb	_mypos
+		.glb	_speed_r
+		.glb	_speed_l
+		.glb	_speed
+		.glb	_timer
+		.glb	_V_bat
+		.glb	_degree
+		.glb	_len_mouse
+		.glb	_log_timer
+		.glb	_log_flag
+		.glb	_I_tar_speed
+		.glb	_I_speed
+		.glb	_I_tar_ang_vel
+		.glb	_I_ang_vel
+		.glb	_push_switch
+		.glb	_main
+		.glb	_battery_disp
+		.glb	_body_correction
+		.glb	_init_all
+		.glb	_BEEP
+		.glb	_LED
+		.glb	_gyro_get_ref
+		.glb	_search_adachi
+		.glb	_turn
+		.glb	_map_write
+		.glb	_wait_ms
+		.glb	_map_copy
+		.glb	_fast_run
+		.glb	_slalom_run
+		.glb	_straight
+		.glb	_slalom
+		.glb	_adjust
+		.glb	_IOex_SWITCH
+		.glb	_back
+		.glb	_config_center
+		.glb	_setup_fsensor
+		.glb	_setup_sensor
+		.SECTION	P,CODE
+_main:
+		.STACK	_main=16
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",48
+		SUB #08H, R0
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",51
+		BSR _init_all
+L11:	; entry.split
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",52
+		MOV.L #00000000H, 04H[R0]
+L12:	; entry.split1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",55
+		BSR _BEEP
+L13:	; entry.split2
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",57
+		MOV.L #_speed_r, R14
+		MOV.L #00000000H, [R14]
+L14:	; entry.split3
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",58
+		MOV.L #_speed_l, R14
+		MOV.L #00000000H, [R14]
+L15:	; entry.split4
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",60
+		BSR _battery_disp
+L16:	; entry.split5
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",63
+		MOV.L #_log_flag, R14
+		MOV.L #00000000H, [R14]
+L17:	; entry.split6
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",64
+		MOV.W #0001H, 02H[R0]
+		BRA L184
+L18:	; switch_clause_bb
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",83
+		MOV.L #_sen_fr, R14
+		MOV.W [R14], R14
+		MOV.L #_sen_fl, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_r, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_l, R15
+		ADD [R15].W, R14
+		CMP #1F41H, R14
+		BLT L165
+L19:	; if_then_bb
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #00000000H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",84
+		BSR _LED
+L20:	; if_then_bb.split
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",85
+		BSR _BEEP
+L21:	; if_then_bb.split7
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",86
+		BSR _gyro_get_ref
+L22:	; if_then_bb.split8
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",87
+		MOV.L #_degree, R14
+		MOV.L #00000000H, [R14]
+L23:	; if_then_bb.split9
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",88
+		MOV.L #_timer, R14
+		MOV.L #00000000H, [R14]
+L24:	; if_then_bb.split10
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",89
+		MOV.L #_log_timer, R14
+		MOV.L #00000000H, [R14]
+L25:	; if_then_bb.split11
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",90
+		MOV.L #_len_mouse, R14
+		MOV.L #00000000H, [R14]
+L26:	; if_then_bb.split12
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",91
+		BSR _BEEP
+L27:	; if_then_bb.split13
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",92
+		MOV.L #_mypos, R1
+		MOV.W #0000H, 02H[R1]
+		MOV.W #0000H, [R1]
+L28:	; if_then_bb.split14
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",93
+		MOV.L #_mypos, R1
+		MOV.L #00000000H, 04H[R1]
+L29:	; if_then_bb.split15
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",94
+		MOV.L #_log_flag, R14
+		MOV.L #00000001H, [R14]
+L30:	; if_then_bb.split16
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",95
+		MOV.L #_log_timer, R14
+		MOV.L #00000000H, [R14]
+L31:	; if_then_bb.split17
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",96
+		BSR _body_correction
+L32:	; if_then_bb.split18
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #0000000CH, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",97
+		BSR _LED
+L33:	; if_then_bb.split19
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #00000001H, R2
+		MOV.L #00000006H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",98
+		BSR _search_adachi
+L34:	; if_then_bb.split20
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #00000000H, R4
+		MOV.L #41490FDBH, R3
+		MOV.L #4216CBE4H, R2
+		MOV.L #000000B4H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",99
+		BSR _turn
+L35:	; if_then_bb.split21
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",100
+		MOV.L #_mypos, R1
+		MOV.L 04H[R1], R2
+		ADD #06H, R2
+		MOV.L R2, R14
+		DIV #04H, R14
+		SHLL #02H, R14
+		SUB R14, R2
+		MOV.L R2, 04H[R1]
+L36:	; if_then_bb.split22
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",101
+		BSR _map_write
+L37:	; if_then_bb.split23
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",102
+		BSR _BEEP
+L38:	; if_then_bb.split24
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #00000064H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",103
+		BSR _wait_ms
+L39:	; if_then_bb.split25
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",104
+		BSR _BEEP
+L40:	; if_then_bb.split26
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #00000064H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",105
+		BSR _wait_ms
+L41:	; if_then_bb.split27
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",106
+		BSR _BEEP
+L42:	; if_then_bb.split28
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #00000003H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",107
+		BSR _LED
+L43:	; if_then_bb.split29
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #00000000H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",108
+		MOV.L R1, R2
+		BSR _search_adachi
+L44:	; if_then_bb.split30
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #0000000FH, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",109
+		BSR _LED
+L45:	; if_then_bb.split31
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #00000000H, R4
+		MOV.L #41490FDBH, R3
+		MOV.L #4216CBE4H, R2
+		MOV.L #000000B4H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",110
+		BSR _turn
+L46:	; if_then_bb.split32
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #0008C02CH, R14
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",111
+		BCLR #06H, [R14].B
+L47:	; if_then_bb.split33
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",112
+		BSR _map_write
+L48:	; if_then_bb.split34
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",113
+		MOV.L #_log_flag, R14
+		MOV.L #00000000H, [R14]
+L49:	; if_then_bb.split35
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",114
+		BSR _BEEP
+L50:	; if_then_bb.split36
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #00000000H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",115
+		BSR _LED
+		BRA L165
+L51:	; switch_clause_bb21
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",130
+		MOV.L #_sen_fr, R14
+		MOV.W [R14], R14
+		MOV.L #_sen_fl, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_r, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_l, R15
+		ADD [R15].W, R14
+		CMP #1F41H, R14
+		BLT L165
+L52:	; if_then_bb36
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #00000000H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",131
+		BSR _LED
+L53:	; if_then_bb36.split
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",132
+		BSR _BEEP
+L54:	; if_then_bb36.split37
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",133
+		BSR _map_copy
+L55:	; if_then_bb36.split38
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",134
+		MOV.L #_degree, R14
+		MOV.L #00000000H, [R14]
+L56:	; if_then_bb36.split39
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",135
+		MOV.L #_timer, R14
+		MOV.L #00000000H, [R14]
+L57:	; if_then_bb36.split40
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",136
+		BSR _gyro_get_ref
+L58:	; if_then_bb36.split41
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",137
+		BSR _BEEP
+L59:	; if_then_bb36.split42
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",138
+		MOV.L #_mypos, R1
+		MOV.W #0000H, 02H[R1]
+		MOV.W #0000H, [R1]
+L60:	; if_then_bb36.split43
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",139
+		MOV.L #_mypos, R1
+		MOV.L #00000000H, 04H[R1]
+L61:	; if_then_bb36.split44
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",140
+		MOV.L #_log_flag, R14
+		MOV.L #00000001H, [R14]
+L62:	; if_then_bb36.split45
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",141
+		MOV.L #_log_timer, R14
+		MOV.L #00000000H, [R14]
+L63:	; if_then_bb36.split46
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",142
+		MOV.L #_len_mouse, R14
+		MOV.L #00000000H, [R14]
+L64:	; if_then_bb36.split47
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",143
+		BSR _body_correction
+L65:	; if_then_bb36.split48
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #0000000CH, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",144
+		BSR _LED
+L66:	; if_then_bb36.split49
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #00000001H, R2
+		MOV.L #00000006H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",145
+		BSR _fast_run
+L67:	; if_then_bb36.split50
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #00000000H, R4
+		MOV.L #41490FDBH, R3
+		MOV.L #4216CBE4H, R2
+		MOV.L #000000B4H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",146
+		BSR _turn
+L68:	; if_then_bb36.split51
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",147
+		MOV.L #_mypos, R1
+		MOV.L 04H[R1], R2
+		ADD #06H, R2
+		MOV.L R2, R14
+		DIV #04H, R14
+		SHLL #02H, R14
+		SUB R14, R2
+		MOV.L R2, 04H[R1]
+L69:	; if_then_bb36.split52
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",148
+		BSR _map_write
+L70:	; if_then_bb36.split53
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",149
+		BSR _BEEP
+L71:	; if_then_bb36.split54
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #00000064H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",150
+		BSR _wait_ms
+L72:	; if_then_bb36.split55
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",151
+		BSR _BEEP
+L73:	; if_then_bb36.split56
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #00000064H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",152
+		BSR _wait_ms
+L74:	; if_then_bb36.split57
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",153
+		BSR _BEEP
+L75:	; if_then_bb36.split58
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #00000003H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",154
+		BSR _LED
+L76:	; if_then_bb36.split59
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #00000000H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",155
+		MOV.L R1, R2
+		BSR _search_adachi
+L77:	; if_then_bb36.split60
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #0000000FH, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",156
+		BSR _LED
+L78:	; if_then_bb36.split61
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #00000000H, R4
+		MOV.L #41490FDBH, R3
+		MOV.L #4216CBE4H, R2
+		MOV.L #000000B4H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",157
+		BSR _turn
+L79:	; if_then_bb36.split62
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #0008C02CH, R14
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",158
+		BCLR #06H, [R14].B
+L80:	; if_then_bb36.split63
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",159
+		BSR _map_write
+L81:	; if_then_bb36.split64
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",160
+		MOV.L #_log_flag, R14
+		MOV.L #00000000H, [R14]
+L82:	; if_then_bb36.split65
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",161
+		BSR _BEEP
+L83:	; if_then_bb36.split66
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #00000000H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",162
+		BSR _LED
+		BRA L165
+L84:	; switch_clause_bb42
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",177
+		MOV.L #_sen_fr, R14
+		MOV.W [R14], R14
+		MOV.L #_sen_fl, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_r, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_l, R15
+		ADD [R15].W, R14
+		CMP #1F41H, R14
+		BLT L165
+L85:	; if_then_bb58
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #00000000H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",178
+		BSR _LED
+L86:	; if_then_bb58.split
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",179
+		BSR _BEEP
+L87:	; if_then_bb58.split67
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",180
+		BSR _map_copy
+L88:	; if_then_bb58.split68
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",181
+		MOV.L #_degree, R14
+		MOV.L #00000000H, [R14]
+L89:	; if_then_bb58.split69
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",182
+		MOV.L #_timer, R14
+		MOV.L #00000000H, [R14]
+L90:	; if_then_bb58.split70
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",183
+		BSR _gyro_get_ref
+L91:	; if_then_bb58.split71
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",184
+		BSR _BEEP
+L92:	; if_then_bb58.split72
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",185
+		MOV.L #_mypos, R1
+		MOV.W #0000H, 02H[R1]
+		MOV.W #0000H, [R1]
+L93:	; if_then_bb58.split73
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",186
+		MOV.L #_mypos, R1
+		MOV.L #00000000H, 04H[R1]
+L94:	; if_then_bb58.split74
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",187
+		MOV.L #_log_flag, R14
+		MOV.L #00000001H, [R14]
+L95:	; if_then_bb58.split75
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",188
+		MOV.L #_log_timer, R14
+		MOV.L #00000000H, [R14]
+L96:	; if_then_bb58.split76
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",189
+		MOV.L #_len_mouse, R14
+		MOV.L #00000000H, [R14]
+L97:	; if_then_bb58.split77
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",190
+		BSR _body_correction
+L98:	; if_then_bb58.split78
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #0000000CH, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",191
+		BSR _LED
+L99:	; if_then_bb58.split79
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #00000001H, R2
+		MOV.L #00000006H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",192
+		BSR _slalom_run
+L100:	; if_then_bb58.split80
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #00000000H, R4
+		MOV.L #41490FDBH, R3
+		MOV.L #4216CBE4H, R2
+		MOV.L #000000B4H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",193
+		BSR _turn
+L101:	; if_then_bb58.split81
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",194
+		MOV.L #_mypos, R1
+		MOV.L 04H[R1], R2
+		ADD #06H, R2
+		MOV.L R2, R14
+		DIV #04H, R14
+		SHLL #02H, R14
+		SUB R14, R2
+		MOV.L R2, 04H[R1]
+L102:	; if_then_bb58.split82
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",195
+		BSR _map_write
+L103:	; if_then_bb58.split83
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",196
+		BSR _BEEP
+L104:	; if_then_bb58.split84
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #00000064H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",197
+		BSR _wait_ms
+L105:	; if_then_bb58.split85
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",198
+		BSR _BEEP
+L106:	; if_then_bb58.split86
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #00000064H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",199
+		BSR _wait_ms
+L107:	; if_then_bb58.split87
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",200
+		BSR _BEEP
+L108:	; if_then_bb58.split88
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #00000003H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",201
+		BSR _LED
+L109:	; if_then_bb58.split89
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #00000000H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",202
+		MOV.L R1, R2
+		BSR _search_adachi
+L110:	; if_then_bb58.split90
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #0000000FH, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",203
+		BSR _LED
+L111:	; if_then_bb58.split91
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #00000000H, R4
+		MOV.L #41490FDBH, R3
+		MOV.L #4216CBE4H, R2
+		MOV.L #000000B4H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",204
+		BSR _turn
+L112:	; if_then_bb58.split92
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #0008C02CH, R14
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",205
+		BCLR #06H, [R14].B
+L113:	; if_then_bb58.split93
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",206
+		BSR _map_write
+L114:	; if_then_bb58.split94
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",207
+		MOV.L #_log_flag, R14
+		MOV.L #00000000H, [R14]
+L115:	; if_then_bb58.split95
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",208
+		BSR _BEEP
+L116:	; if_then_bb58.split96
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #00000000H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",209
+		BSR _LED
+		BRA L165
+L117:	; switch_clause_bb64
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",225
+		MOV.L #_sen_fr, R14
+		MOV.W [R14], R14
+		MOV.L #_sen_fl, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_r, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_l, R15
+		ADD [R15].W, R14
+		CMP #1F41H, R14
+		BLT L165
+L118:	; if_then_bb80
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",226
+		BSR _BEEP
+L119:	; if_then_bb80.split
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",227
+		BSR _setup_sensor
+L120:	; if_then_bb80.split97
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #000001F4H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",228
+		BSR _wait_ms
+		BRA L165
+L121:	; switch_clause_bb82
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",244
+		MOV.L #_sen_fr, R14
+		MOV.W [R14], R14
+		MOV.L #_sen_fl, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_r, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_l, R15
+		ADD [R15].W, R14
+		CMP #1F41H, R14
+		BLT L165
+L122:	; if_then_bb97
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",245
+		BSR _BEEP
+L123:	; if_then_bb97.split
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",246
+		BSR _setup_fsensor
+L124:	; if_then_bb97.split98
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #00000000H, R4
+		MOV.L #41490FDBH, R3
+		MOV.L #4216CBE4H, R2
+		MOV.L #000000B4H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",247
+		BSR _turn
+L125:	; if_then_bb97.split99
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #000007D0H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",248
+		BSR _wait_ms
+		BRA L165
+L126:	; switch_clause_bb99
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",264
+		MOV.L #_sen_fr, R14
+		MOV.W [R14], R14
+		MOV.L #_sen_fl, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_r, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_l, R15
+		ADD [R15].W, R14
+		CMP #1F41H, R14
+		BLT L165
+L127:	; if_then_bb114
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",265
+		BSR _BEEP
+L128:	; if_then_bb114.split
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",266
+		BSR _battery_disp
+L129:	; if_then_bb114.split100
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #000001F4H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",267
+		BSR _wait_ms
+		BRA L165
+L130:	; switch_clause_bb116
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",283
+		MOV.L #_sen_fr, R14
+		MOV.W [R14], R14
+		MOV.L #_sen_fl, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_r, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_l, R15
+		ADD [R15].W, R14
+		CMP #1F41H, R14
+		BLT L165
+L131:	; if_then_bb131
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",284
+		BSR _BEEP
+L132:	; if_then_bb131.split
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #000001F4H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",285
+		BSR _wait_ms
+L133:	; if_then_bb131.split101
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",286
+		BSR _body_correction
+L134:	; if_then_bb131.split102
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #3E0F5C29H, R4
+		MOV.L #3F4CCCCDH, R3
+		MOV.L #3FC00000H, R2
+		MOV.L #43070000H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",287
+		BSR _straight
+L135:	; if_then_bb131.split103
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		SUB #04H, R0
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",288
+		MOV.L #3E0F5C29H, [R0]
+		MOV.L #00000001H, R4
+		MOV.L #423C7EDDH, R3
+		MOV.L #41A5E048H, R2
+		MOV.L #0000005AH, R1
+		BSR _slalom
+		ADD #04H, R0
+L136:	; if_then_bb131.split104
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #00000000H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",289
+		MOV.L R1, R2
+		MOV.L R1, R3
+		MOV.L R1, R4
+		BSR _straight
+L137:	; if_then_bb131.split105
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #000001F4H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",290
+		BSR _wait_ms
+		BRA L165
+L138:	; switch_clause_bb133
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",305
+		MOV.L #_sen_fr, R14
+		MOV.W [R14], R14
+		MOV.L #_sen_fl, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_r, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_l, R15
+		ADD [R15].W, R14
+		CMP #1F41H, R14
+		BLT L165
+L139:	; if_then_bb148
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",306
+		BSR _BEEP
+L140:	; if_then_bb148.split
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #000001F4H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",308
+		BSR _wait_ms
+		BRA L165
+L141:	; switch_clause_bb150
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",323
+		MOV.L #_sen_fr, R14
+		MOV.W [R14], R14
+		MOV.L #_sen_fl, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_r, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_l, R15
+		ADD [R15].W, R14
+		CMP #1F41H, R14
+		BLT L165
+L142:	; if_then_bb165
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",324
+		BSR _BEEP
+L143:	; if_then_bb165.split
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #000001F4H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",326
+		BSR _wait_ms
+		BRA L165
+L144:	; switch_clause_bb167
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",341
+		MOV.L #_sen_fr, R14
+		MOV.W [R14], R14
+		MOV.L #_sen_fl, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_r, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_l, R15
+		ADD [R15].W, R14
+		CMP #1F41H, R14
+		BLT L165
+L145:	; if_then_bb182
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",342
+		BSR _BEEP
+L146:	; if_then_bb182.split
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #000001F4H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",344
+		BSR _wait_ms
+		BRA L165
+L147:	; switch_clause_bb184
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",359
+		MOV.L #_sen_fr, R14
+		MOV.W [R14], R14
+		MOV.L #_sen_fl, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_r, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_l, R15
+		ADD [R15].W, R14
+		CMP #1F41H, R14
+		BLT L165
+L148:	; if_then_bb199
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",360
+		BSR _BEEP
+L149:	; if_then_bb199.split
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #000001F4H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",362
+		BSR _wait_ms
+		BRA L165
+L150:	; switch_clause_bb201
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",377
+		MOV.L #_sen_fr, R14
+		MOV.W [R14], R14
+		MOV.L #_sen_fl, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_r, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_l, R15
+		ADD [R15].W, R14
+		CMP #1F41H, R14
+		BLT L165
+L151:	; if_then_bb216
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",378
+		BSR _BEEP
+L152:	; if_then_bb216.split
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #000001F4H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",380
+		BSR _wait_ms
+		BRA L165
+L153:	; switch_clause_bb218
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",396
+		MOV.L #_sen_fr, R14
+		MOV.W [R14], R14
+		MOV.L #_sen_fl, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_r, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_l, R15
+		ADD [R15].W, R14
+		CMP #1F41H, R14
+		BLT L165
+L154:	; if_then_bb233
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",397
+		BSR _BEEP
+L155:	; if_then_bb233.split
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #000001F4H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",399
+		BSR _wait_ms
+		BRA L165
+L156:	; switch_clause_bb235
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",414
+		MOV.L #_sen_fr, R14
+		MOV.W [R14], R14
+		MOV.L #_sen_fl, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_r, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_l, R15
+		ADD [R15].W, R14
+		CMP #1F41H, R14
+		BLT L165
+L157:	; if_then_bb250
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",415
+		BSR _BEEP
+L158:	; if_then_bb250.split
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #000001F4H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",417
+		BSR _wait_ms
+		BRA L165
+L159:	; switch_clause_bb252
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",432
+		MOV.L #_sen_fr, R14
+		MOV.W [R14], R14
+		MOV.L #_sen_fl, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_r, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_l, R15
+		ADD [R15].W, R14
+		CMP #1F41H, R14
+		BLT L165
+L160:	; if_then_bb267
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",433
+		BSR _BEEP
+L161:	; bb269
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",434
+		MOV.L #_sen_fr, R14
+		MOV.W [R14], R14
+		MOV.L #_sen_fl, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_r, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_l, R15
+		ADD [R15].W, R14
+		CMP #1F40H, R14
+		BGT L161
+L162:	; bb284
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",435
+		BSR _adjust
+L163:	; bb284.split
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",437
+		BSR _BEEP
+L164:	; bb284.split106
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #000001F4H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",438
+		BSR _wait_ms
+L165:	; switch_break_bb
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",450
+		MOV.L #_speed, R14
+		MOV.L #3DCCCCCDH, R15
+		FCMP [R14].L, R15
+		BPZ L173
+L166:	; if_then_bb291
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",451
+		MOV.W 02H[R0], R1
+		CMP #0FH, R1
+		BNE L168
+L167:	; if_then_bb297
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",452
+		MOV.W #0001H, 02H[R0]
+		BRA L169
+L168:	; if_else_bb
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",454
+		MOV.W 02H[R0], R1
+		ADD #01H, R1
+		MOV.W R1, 02H[R0]
+L169:	; if_break_bb300
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",456
+		MOV.L #00000000H, 04H[R0]
+		BRA L171
+L170:	; bb301
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L 04H[R0], R1
+		ADD #01H, R1
+		MOV.L R1, 04H[R0]
+L171:	; bb304
+		MOV.L 04H[R0], R1
+		CMP #000F4240H, R1
+		BLTU L170
+L172:	; bb309
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",457
+		BSR _BEEP
+L173:	; if_break_bb310
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",460
+		MOV.L #_speed, R14
+		MOV.L [R14], R14
+		FCMP #0BDCCCCCDH, R14
+		BPZ L181
+L174:	; if_then_bb315
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",461
+		MOV.W 02H[R0], R1
+		CMP #01H, R1
+		BNE L176
+L175:	; if_then_bb321
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",462
+		MOV.W #000FH, 02H[R0]
+		BRA L177
+L176:	; if_else_bb322
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",464
+		MOV.W 02H[R0], R1
+		SUB #01H, R1
+		MOV.W R1, 02H[R0]
+L177:	; if_break_bb325
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",466
+		MOV.L #00000000H, 04H[R0]
+		BRA L179
+L178:	; bb326
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L 04H[R0], R1
+		ADD #01H, R1
+		MOV.L R1, 04H[R0]
+L179:	; bb329
+		MOV.L 04H[R0], R1
+		CMP #000F4240H, R1
+		BLTU L178
+L180:	; bb334
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",467
+		BSR _BEEP
+L181:	; if_break_bb335
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",469
+		MOV.W 02H[R0], R1
+		BSR _LED
+L182:	; if_break_bb335.split
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",472
+		BSR _IOex_SWITCH
+		MOV.L #_push_switch, R14
+		MOV.B R1, [R14]
+L183:	; if_break_bb335.split107
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #0008C02CH, R14
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",473
+		BCLR #06H, [R14].B
+L184:	; bb338.split
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",66
+		MOV.L #_I_tar_ang_vel, R14
+		MOV.L #00000000H, [R14]
+L185:	; bb338.split108
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",67
+		MOV.L #_I_ang_vel, R14
+		MOV.L #00000000H, [R14]
+L186:	; bb338.split109
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",68
+		MOV.L #_I_tar_speed, R14
+		MOV.L #00000000H, [R14]
+L187:	; bb338.split110
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",69
+		MOV.L #_I_speed, R14
+		MOV.L #00000000H, [R14]
+L188:	; bb338.split111
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",71
+		MOV.W 02H[R0], R1
+		SUB #01H, R1
+		CMP #0EH, R1
+		BGTU L165
+L189:	; bb338.split111
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #L190, R14
+		.swmov L190, R1, R14, R14
+L191:
+		BRA.L R14
+_battery_disp:
+		.STACK	_battery_disp=12
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",480
+		SUB #08H, R0
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",481
+		MOV.L #_V_bat, R14
+		MOV.L [R14], R1
+		FADD #0C0600000H, R1
+		FMUL #43480000H, R1
+		MOV.L R1, 04H[R0]
+L193:	; entry.split
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #00000000H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",482
+		BSR _LED
+L194:	; entry.split1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",483
+		MOV.L #00000000H, [R0]
+		BRA L205
+L195:	; bb
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",484
+		MOV.L 04H[R0], R1
+		FCMP #42A00000H, R1
+		BLT L197
+L196:	; if_then_bb
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #0000000FH, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",485
+		BSR _LED
+		BRA L202
+L197:	; if_else_bb
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",486
+		MOV.L 04H[R0], R1
+		FCMP #42700000H, R1
+		BLT L199
+L198:	; if_then_bb12
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #00000007H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",487
+		BSR _LED
+		BRA L202
+L199:	; if_else_bb13
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",488
+		MOV.L 04H[R0], R1
+		FCMP #42200000H, R1
+		BLT L201
+L200:	; if_then_bb18
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #00000003H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",489
+		BSR _LED
+		BRA L202
+L201:	; if_else_bb19
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #00000001H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",491
+		BSR _LED
+L202:	; if_break_bb21
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #000000C8H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",493
+		BSR _wait_ms
+L203:	; if_break_bb21.split
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #00000000H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",494
+		BSR _LED
+L204:	; if_break_bb21.split2
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #000000C8H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",495
+		BSR _wait_ms
+		MOV.L [R0], R1
+		ADD #01H, R1
+		MOV.L R1, [R0]
+L205:	; bb24
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",483
+		MOV.L [R0], R1
+		CMP #03H, R1
+		BLT L195
+L206:	; return.split
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",499
+		RTSD #08H
+_body_correction:
+		.STACK	_body_correction=4
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",501
+		MOV.L #00000000H, R4
+		MOV.L #41490FDBH, R3
+		MOV.L #4216CBE4H, R2
+		MOV.L #0000005AH, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",502
+		BSR _turn
+L208:	; entry.split
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #0C1F00000H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",503
+		BSR _back
+L209:	; entry.split1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",504
+		MOV.L #_degree, R14
+		MOV.L #00000000H, [R14]
+L210:	; entry.split2
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #00000000H, R4
+		MOV.L #3DCCCCCDH, R3
+		MOV.L #3F800000H, R2
+		MOV.L #41A00000H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",505
+		BSR _straight
+L211:	; entry.split3
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #00000001H, R4
+		MOV.L #41490FDBH, R3
+		MOV.L #4216CBE4H, R2
+		MOV.L #0000005AH, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",506
+		BSR _turn
+L212:	; entry.split4
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #0C1F00000H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",507
+		BSR _back
+L213:	; entry.split5
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",508
+		MOV.L #_degree, R14
+		MOV.L #00000000H, [R14]
+L214:	; entry.split6
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #00000000H, R4
+		MOV.L #3DCCCCCDH, R3
+		MOV.L #3F800000H, R2
+		MOV.L #41A00000H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",509
+		BSR _straight
+L215:	; entry.split7
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",510
+		RTS
+_config_center:
+		.STACK	_config_center=4
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",514
+		MOV.L #_sen_r, R14
+		MOV.W [R14], 0AH[R14]
+L217:	; entry.split
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",515
+		MOV.L #_sen_l, R14
+		MOV.W [R14], 0AH[R14]
+L218:	; entry.split1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",516
+		RTS
+_setup_fsensor:
+		.STACK	_setup_fsensor=12
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",519
+		SUB #08H, R0
+		MOV.L #0000000FH, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",523
+		BSR _LED
+L220:	; entry.split
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #000001F4H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",524
+		BSR _wait_ms
+L221:	; entry.split1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",525
+		BSR _BEEP
+L222:	; entry.split2
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #000001F4H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",526
+		BSR _wait_ms
+L223:	; entry.split3
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",527
+		BSR _BEEP
+L224:	; entry.split4
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #000001F4H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",528
+		BSR _wait_ms
+L225:	; entry.split5
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",529
+		BSR _BEEP
+L226:	; entry.split6
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #000001F4H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",530
+		BSR _wait_ms
+L227:	; entry.split7
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",531
+		MOV.L #00000000H, 04H[R0]
+L228:	; entry.split8
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",532
+		MOV.L #00000000H, [R0]
+		BRA L231
+L229:	; bb
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #00000001H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",533
+		BSR _wait_ms
+L230:	; bb.split
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",534
+		MOV.L #_sen_fr, R14
+		MOV.W [R14], R1
+		ADD 04H[R0].L, R1
+		MOV.L R1, 04H[R0]
+		MOV.L [R0], R1
+		ADD #01H, R1
+		MOV.L R1, [R0]
+L231:	; bb9
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",532
+		MOV.L [R0], R1
+		CMP #64H, R1
+		BLT L229
+L232:	; bb13
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",536
+		MOV.L 04H[R0], R1
+		MOV.L #_sen_fr, R2
+		MOV.W R1, 0CH[R2]
+L233:	; bb13.split
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",537
+		MOV.L #00000000H, 04H[R0]
+L234:	; bb13.split9
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",538
+		MOV.L #00000000H, [R0]
+		BRA L237
+L235:	; bb16
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #00000001H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",539
+		BSR _wait_ms
+L236:	; bb16.split
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",540
+		MOV.L #_sen_fl, R14
+		MOV.W [R14], R1
+		ADD 04H[R0].L, R1
+		MOV.L R1, 04H[R0]
+		MOV.L [R0], R1
+		ADD #01H, R1
+		MOV.L R1, [R0]
+L237:	; bb23
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",538
+		MOV.L [R0], R1
+		CMP #64H, R1
+		BLT L235
+L238:	; bb28
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",542
+		MOV.L 04H[R0], R1
+		DIV #64H, R1
+		MOV.L #_sen_fl, R2
+		MOV.W R1, 0CH[R2]
+L239:	; bb28.split
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #000007D0H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",543
+		BSR _wait_ms
+L240:	; bb28.split10
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",544
+		RTSD #08H
+_setup_sensor:
+		.STACK	_setup_sensor=12
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",547
+		SUB #08H, R0
+		MOV.L #00000006H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",552
+		BSR _LED
+L242:	; entry.split
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #000001F4H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",553
+		BSR _wait_ms
+L243:	; entry.split1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",554
+		BSR _BEEP
+L244:	; entry.split2
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #000001F4H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",555
+		BSR _wait_ms
+L245:	; entry.split3
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",556
+		BSR _BEEP
+L246:	; entry.split4
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #000001F4H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",557
+		BSR _wait_ms
+L247:	; entry.split5
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",558
+		MOV.L #00000000H, 04H[R0]
+L248:	; entry.split6
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",559
+		MOV.L #00000000H, [R0]
+		BRA L251
+L249:	; bb
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #00000001H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",560
+		BSR _wait_ms
+L250:	; bb.split
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",561
+		MOV.L #_sen_r, R14
+		MOV.W [R14], R1
+		ADD 04H[R0].L, R1
+		MOV.L R1, 04H[R0]
+		MOV.L [R0], R1
+		ADD #01H, R1
+		MOV.L R1, [R0]
+L251:	; bb9
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",559
+		MOV.L [R0], R1
+		CMP #64H, R1
+		BLT L249
+L252:	; bb13
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",563
+		MOV.L 04H[R0], R1
+		DIV #64H, R1
+		MOV.L #_sen_r, R2
+		MOV.W R1, 0AH[R2]
+L253:	; bb13.split
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",564
+		MOV.L #00000000H, 04H[R0]
+L254:	; bb13.split7
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",565
+		MOV.L #00000000H, [R0]
+		BRA L257
+L255:	; bb17
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #00000001H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",566
+		BSR _wait_ms
+L256:	; bb17.split
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",567
+		MOV.L #_sen_l, R14
+		MOV.W [R14], R1
+		ADD 04H[R0].L, R1
+		MOV.L R1, 04H[R0]
+		MOV.L [R0], R1
+		ADD #01H, R1
+		MOV.L R1, [R0]
+L257:	; bb24
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",565
+		MOV.L [R0], R1
+		CMP #64H, R1
+		BLT L255
+L258:	; bb29
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",569
+		MOV.L 04H[R0], R1
+		DIV #64H, R1
+		MOV.L #_sen_l, R2
+		MOV.W R1, 0AH[R2]
+L259:	; bb29.split
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #00000008H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",594
+		BSR _LED
+L260:	; bb29.split8
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #000001F4H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",595
+		BSR _wait_ms
+L261:	; bb29.split9
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",596
+		BSR _BEEP
+L262:	; bb29.split10
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #000001F4H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",597
+		BSR _wait_ms
+L263:	; bb29.split11
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",598
+		BSR _BEEP
+L264:	; bb29.split12
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #000001F4H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",599
+		BSR _wait_ms
+L265:	; bb29.split13
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",600
+		BSR _BEEP
+L266:	; bb29.split14
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #000001F4H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",601
+		BSR _wait_ms
+L267:	; bb29.split15
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",602
+		MOV.L #00000000H, 04H[R0]
+L268:	; bb29.split16
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",603
+		MOV.L #00000000H, [R0]
+		BRA L271
+L269:	; bb33
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #00000001H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",604
+		BSR _wait_ms
+L270:	; bb33.split
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",605
+		MOV.L #_sen_r, R14
+		MOV.W [R14], R1
+		ADD 04H[R0].L, R1
+		MOV.L R1, 04H[R0]
+		MOV.L [R0], R1
+		ADD #01H, R1
+		MOV.L R1, [R0]
+L271:	; bb40
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",603
+		MOV.L [R0], R1
+		CMP #64H, R1
+		BLT L269
+L272:	; bb45
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",607
+		MOV.L 04H[R0], R1
+		DIV #64H, R1
+		MOV.L #_sen_r, R2
+		MOV.W R1, 0CH[R2]
+L273:	; bb45.split
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #00000001H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",610
+		BSR _LED
+L274:	; bb45.split17
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #000001F4H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",611
+		BSR _wait_ms
+L275:	; bb45.split18
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",612
+		BSR _BEEP
+L276:	; bb45.split19
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #000001F4H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",613
+		BSR _wait_ms
+L277:	; bb45.split20
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",614
+		BSR _BEEP
+L278:	; bb45.split21
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #000001F4H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",615
+		BSR _wait_ms
+L279:	; bb45.split22
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",616
+		BSR _BEEP
+L280:	; bb45.split23
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #000001F4H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",617
+		BSR _wait_ms
+L281:	; bb45.split24
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",618
+		MOV.L #00000000H, 04H[R0]
+L282:	; bb45.split25
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",619
+		MOV.L #00000000H, [R0]
+		BRA L285
+L283:	; bb49
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",0
+		MOV.L #00000001H, R1
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",620
+		BSR _wait_ms
+L284:	; bb49.split
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",621
+		MOV.L #_sen_l, R14
+		MOV.W [R14], R1
+		ADD 04H[R0].L, R1
+		MOV.L R1, 04H[R0]
+		MOV.L [R0], R1
+		ADD #01H, R1
+		MOV.L R1, [R0]
+L285:	; bb56
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",619
+		MOV.L [R0], R1
+		CMP #64H, R1
+		BLT L283
+L286:	; bb61
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",623
+		MOV.L 04H[R0], R1
+		DIV #64H, R1
+		MOV.L #_sen_l, R2
+		MOV.W R1, 0CH[R2]
+L287:	; bb61.split
+		.LINE  "C:\Users\kaoru\Documents\step7_maze\HM_StarterKit.c",625
+		RTSD #08H
+		.swsection	W,stuff
+L190:
+		.switch		L18-L191
+		.switch		L51-L191
+		.switch		L84-L191
+		.switch		L117-L191
+		.switch		L121-L191
+		.switch		L126-L191
+		.switch		L130-L191
+		.switch		L138-L191
+		.switch		L141-L191
+		.switch		L144-L191
+		.switch		L147-L191
+		.switch		L150-L191
+		.switch		L153-L191
+		.switch		L156-L191
+		.switch		L159-L191
+		.SECTION	W,ROMDATA,ALIGN=4
+		.SECTION	W_1,ROMDATA
+		.SECTION	W_2,ROMDATA,ALIGN=2
+		.END
